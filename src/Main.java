@@ -16,6 +16,6 @@ public class Main {
     public static void printAndCalculate(Mitarbeiter mitarbeiter) {
         System.out.println("--------------------------------------------------------------------");
         System.out.println(mitarbeiter.toString() + " bekommt " + mitarbeiter.entgeltBerechnen());
-        System.out.println("Und hat dieses Jahr " + mitarbeiter.jahresgehaltBisHeute + " erhalten");
+        System.out.println("Und hat dieses Jahr " + mitarbeiter.getJahresgehaltBisHeute() + " erhalten");
     }
 }
