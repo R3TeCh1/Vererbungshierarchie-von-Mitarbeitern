@@ -1,3 +1,6 @@
+/**
+ * @author Matthias Vollmer
+ */
 public abstract class Mitarbeiter {
     protected String vorname;
     protected String nachname;

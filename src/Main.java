@@ -1,3 +1,6 @@
+/**
+ * @author Matthias Vollmer
+ */
 public class Main {
     public static void main(String[] args) {
         Zeitarbeiter zeitarbeiter = new Zeitarbeiter("Nazanin", "Golalizadeh", 15.0f, 40);
