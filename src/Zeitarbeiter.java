@@ -3,17 +3,14 @@
  * @version 17.10.1999
  */
 
-public class Zeitarbeiter {
+public class Zeitarbeiter extends Mitarbeiter{
 
-        private String vorname;
-        private String nachname;
         private Float stundenLohn;
         private int gearbeiteteStunden;
 
 
     public Zeitarbeiter(String vorname, String nachname, float stundenLohn, int gearbeiteteStunden) {
-        this.vorname = vorname;
-        this.nachname = nachname;
+       super(vorname, nachname);
         this.stundenLohn = stundenLohn;
         this.gearbeiteteStunden = gearbeiteteStunden;
     }
@@ -44,7 +41,8 @@ public class Zeitarbeiter {
         this.gearbeiteteStunden = gearbeiteteStunden;
     }
 
-    public float entgeldBerechnen() {
+    @Override
+    public float endgeldBerechnen() {
         return gearbeiteteStunden;
     }
 
