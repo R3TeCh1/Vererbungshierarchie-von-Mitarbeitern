@@ -39,8 +39,8 @@ public class Zeitarbeiter extends Mitarbeiter{
         return gearbeiteteStunden;
 
     }
-//Setter entgeltBerechnen()
 
+//Setter gearbeiteteStunden
     public void setGearbeiteteStunden(int gearbeiteteStunden) {
         this.gearbeiteteStunden = gearbeiteteStunden;
     }
