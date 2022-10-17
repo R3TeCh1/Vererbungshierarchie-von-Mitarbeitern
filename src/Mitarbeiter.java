@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
 public abstract class Mitarbeiter {
     protected String vorname;
     protected String nachname;
-    protected float jahresgehaltBisHeute;
+    protected float jahresgehaltBisHeute;       // should of been private
 
     Mitarbeiter(String vorname, String nachname) {
         this.vorname = vorname;
