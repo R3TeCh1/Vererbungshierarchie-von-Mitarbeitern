@@ -1,3 +1,6 @@
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 /**
  * @author Kadir Erzurum
  * @version 17.10.2022
@@ -21,6 +24,10 @@ public class ATAngstellter extends Mitarbeiter{
     }
 
     @Override
-    public float entgeltBerechnen();
+    public float entgeltBerechnen() {
+        if (new GregorianCalendar().get(Calendar.MONTH) == Calendar.JANUARY) jahresgehaltBisHeute = 0;
+        super.jahresgehaltBisHeute += monatsLohn;
+        return monatsLohn;
+    }
 
 }

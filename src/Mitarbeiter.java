@@ -24,5 +24,5 @@ public abstract class Mitarbeiter {
         return getClass().getSimpleName() + " " + nachname + ", " + vorname;
     }
 
-    public abstract float endgeldBerechnen();
+    public abstract float entgeltBerechnen();
 }

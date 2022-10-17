@@ -1,3 +1,6 @@
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 /**
  * @author Nazanin Golalizadeh
  * @version 17.10.1999
@@ -43,8 +46,10 @@ public class Zeitarbeiter extends Mitarbeiter{
     }
 
     @Override
-    public float endgeldBerechnen() {
-        return gearbeiteteStunden;
+    public float entgeltBerechnen() {
+        if (new GregorianCalendar().get(Calendar.MONTH) == Calendar.JANUARY) jahresgehaltBisHeute = 0;
+        super.jahresgehaltBisHeute = gearbeiteteStunden * stundenLohn;
+        return gearbeiteteStunden * stundenLohn;
     }
 
 }

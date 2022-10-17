@@ -1,3 +1,7 @@
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 public class Angestellter extends Mitarbeiter{
 
   private float monatslohn;
@@ -27,7 +31,9 @@ public class Angestellter extends Mitarbeiter{
   }
 
   @Override
-  public float entgeldBerechnen() {
+  public float entgeltBerechnen() {
+    if (new GregorianCalendar().get(Calendar.MONTH) == Calendar.JANUARY) jahresgehaltBisHeute = 0;
+    super.jahresgehaltBisHeute += monatslohn + (gearbeiteteÜberstunden * überStundenTarif);
     return monatslohn + (gearbeiteteÜberstunden * überStundenTarif);
   }
 }
