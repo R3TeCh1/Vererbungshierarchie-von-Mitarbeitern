@@ -16,6 +16,7 @@ public class Zeitarbeiter extends Mitarbeiter{
     }
 
 
+
 //Getter
 
         public String getVorname(){
