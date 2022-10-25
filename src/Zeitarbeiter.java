@@ -14,17 +14,16 @@ public class Zeitarbeiter implements IMitarbeiter, ISteuerZahler{
         private int gearbeiteteMonate;
         private float jahresgehaltBisHeute;
 
-
-    public Zeitarbeiter(String vorname, String nachname, float stundenLohn, int gearbeiteteStunden,int gearbeiteteMonate, float jahresgehaltBisHeute) {
-        if (stundenLohn / (40 * 4) < MINDEST_LOHN) {
+    public Zeitarbeiter(String vorname, String nachname, float stundenLohn, int gearbeiteteStunden) {
+        if (stundenLohn < MINDEST_LOHN) {
             System.out.println(stundenLohn + " ist zu wenig");
-
         }
         this.vorname = vorname;
         this.nachname = nachname;
         this.stundenLohn = stundenLohn;
         this.gearbeiteteStunden = gearbeiteteStunden;
         this.gearbeiteteMonate = new GregorianCalendar().get(Calendar.MONTH);
+        this.jahresgehaltBisHeute = getJahresgehaltBisHeute();
     }
 //Getter
 
@@ -69,15 +68,20 @@ public class Zeitarbeiter implements IMitarbeiter, ISteuerZahler{
         }
 
         public float tatsächlicheEinkommenssteuer () {
-            return jahresgehaltBisHeute * 0.16f;
+            return jahresgehaltBisHeute * 0.36f;
         }
 
         public float voraussichtlicheEinkommenssteuer () {
-            return (jahresgehaltBisHeute / gearbeiteteMonate) * 12f * 0.16f;
+            return (jahresgehaltBisHeute / gearbeiteteMonate) * 12f * 0.36f;
         }
 
         //TOSTRING
         public String toString() {
-            return getClass().getSimpleName() + " " + nachname + ", " + vorname;
+            return getClass().getSimpleName() + " " + getVertragsArt().art + ": " + nachname + ", " + vorname;
         }
+
+    @Override
+    public vertragsArtT getVertragsArt() {
+        return vertragsArtT.ZEITARBEITER;
+    }
 }

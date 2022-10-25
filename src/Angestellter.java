@@ -23,6 +23,7 @@ public class Angestellter implements IMitarbeiter, ISteuerZahler {
     this.monatslohn = monatslohn;
     this.überStundenTarif = überStundenTarif;
     this.gearbeiteteMonate = new GregorianCalendar().get(Calendar.MONTH);
+    this.jahresgehaltBisHeute = getJahresgehaltBisHeute();
   }
 
   public float getMonatslohn() {
@@ -69,7 +70,11 @@ public class Angestellter implements IMitarbeiter, ISteuerZahler {
     return (jahresgehaltBisHeute/gearbeiteteMonate) * 12f * 0.16f;
   }
   public String toString() {
-    return getClass().getSimpleName() + " " + nachname + ", " + vorname;
+    return getClass().getSimpleName() + " " + getVertragsArt().art + ": " + nachname + ", " + vorname;
   }
 
+  @Override
+  public vertragsArtT getVertragsArt() {
+    return vertragsArtT.ANGESTELLTER;
+  }
 }

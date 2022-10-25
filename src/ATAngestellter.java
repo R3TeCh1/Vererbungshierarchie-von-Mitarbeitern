@@ -5,7 +5,7 @@ import java.util.GregorianCalendar;
  * @author Kadir Erzurum
  * @version 17.10.2022
  */
-public class ATAngstellter implements IMitarbeiter, ISteuerZahler{
+public class ATAngestellter implements IMitarbeiter, ISteuerZahler{
 
     //declare
     private String vorname;
@@ -14,15 +14,15 @@ public class ATAngstellter implements IMitarbeiter, ISteuerZahler{
     private float monatslohn;
     private int gearbeiteteMonate;
 
-    ATAngstellter(String vorname, String nachname, float monatsLohn){
+    ATAngestellter(String vorname, String nachname, float monatsLohn){
         this.vorname = vorname;
         this.nachname = nachname;
         this.monatslohn = monatsLohn;
         this.gearbeiteteMonate = new GregorianCalendar().get(Calendar.MONTH);
+        this.jahresgehaltBisHeute = getJahresgehaltBisHeute();
         if(monatslohn/(40*4) < MINDEST_LOHN) {
             System.out.println("Monatslohn: " + monatslohn + ", ist weniger als der Mindestlohn.");
         }
-        System.out.println("Jahresgehalt bis heute beträgt: " + getJahresgehaltBisHeute());
     }
 
 
@@ -34,6 +34,7 @@ public class ATAngstellter implements IMitarbeiter, ISteuerZahler{
         return (jahresgehaltBisHeute/gearbeiteteMonate) * 12f * 0.16f;
     }
 
+    @Override
     public float tatsächlicheEinkommenssteuer() {
         return jahresgehaltBisHeute * 0.16f;
     }
@@ -55,7 +56,11 @@ public class ATAngstellter implements IMitarbeiter, ISteuerZahler{
     }
 
     public String toString() {
-        return getClass().getSimpleName() + " " + nachname + ", " + vorname;
+        return getClass().getSimpleName() + " " + getVertragsArt().art + ": " + nachname + ", " + vorname;
     }
 
+    @Override
+    public vertragsArtT getVertragsArt() {
+        return vertragsArtT.AT_ANGESTELLTER;
+    }
 }
