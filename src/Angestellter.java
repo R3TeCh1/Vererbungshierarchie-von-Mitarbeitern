@@ -63,11 +63,11 @@ public class Angestellter implements IMitarbeiter, ISteuerZahler {
   }
 
   public float tatsächlicheEinkommenssteuer() {
-    return jahresgehaltBisHeute * 0.16f;
+    return jahresgehaltBisHeute * 0.36f;
   }
 
   public float voraussichtlicheEinkommenssteuer() {
-    return (jahresgehaltBisHeute/gearbeiteteMonate) * 12f * 0.16f;
+    return (jahresgehaltBisHeute/gearbeiteteMonate) * 12f * 0.36f;
   }
   public String toString() {
     return getClass().getSimpleName() + " " + getVertragsArt().art + ": " + nachname + ", " + vorname;

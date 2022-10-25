@@ -3,7 +3,7 @@ import java.util.GregorianCalendar;
 
 /**
  * @author Kadir Erzurum
- * @version 17.10.2022
+ * @version 25.10.2022
  */
 public class ATAngestellter implements IMitarbeiter, ISteuerZahler{
 
