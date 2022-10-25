@@ -6,7 +6,7 @@ import java.util.GregorianCalendar;
  * @version 17.10.1999
  */
 
-public class Zeitarbeiter extends Mitarbeiter{
+public class Zeitarbeiter extends IMitarbeiter {
 
         private Float stundenLohn;
         private int gearbeiteteStunden;

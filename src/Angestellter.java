@@ -1,20 +1,28 @@
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
  * @author Ebert Marcel
  */
-public class Angestellter extends Mitarbeiter{
+public class Angestellter implements IMitarbeiter, ISteuerZahler {
 
+  private String vorname;
+  private String nachname;
+  private float jahresgehaltBisHeute;// should of been private
   private float monatslohn;
   private float überStundenTarif;
   private int gearbeiteteÜberstunden;
+  private int gearbeiteteMonate;
 
   public Angestellter(String vorname, String nachname, float monatslohn, float überStundenTarif) {
-    super(vorname, nachname);
+    if(monatslohn/(40*4) < MINDEST_LOHN) {
+      System.out.println(monatslohn + " ist zu wenig");
+    }
+    this.vorname = vorname;
+    this.nachname = nachname;
     this.monatslohn = monatslohn;
     this.überStundenTarif = überStundenTarif;
+    this.gearbeiteteMonate = new GregorianCalendar().get(Calendar.MONTH);
   }
 
   public float getMonatslohn() {
@@ -33,10 +41,35 @@ public class Angestellter extends Mitarbeiter{
     this.gearbeiteteÜberstunden = gearbeiteteÜberstunden;
   }
 
+  public void setGearbeiteteMonate(int gearbeiteteMonate) {
+    this.gearbeiteteMonate = gearbeiteteMonate;
+  }
+
+  public float getJahresgehaltBisHeute() {
+    jahresgehaltBisHeute = 0;
+    GregorianCalendar gc = new GregorianCalendar();
+    for (int monthes = 0; monthes < gc.get(Calendar.MONTH); monthes++) {
+      jahresgehaltBisHeute += entgeltBerechnen();
+    }
+    return jahresgehaltBisHeute;
+  }
+
   @Override
   public float entgeltBerechnen() {
-    if (new GregorianCalendar().get(Calendar.MONTH) == Calendar.JANUARY) jahresgehaltBisHeute = 0;
-    super.jahresgehaltBisHeute += monatslohn + (gearbeiteteÜberstunden * überStundenTarif);
+    if (gearbeiteteMonate == Calendar.JANUARY) jahresgehaltBisHeute = 0;
+    jahresgehaltBisHeute += monatslohn + (gearbeiteteÜberstunden * überStundenTarif);
     return monatslohn + (gearbeiteteÜberstunden * überStundenTarif);
   }
+
+  public float tatsächlicheEinkommenssteuer() {
+    return jahresgehaltBisHeute * 0.16f;
+  }
+
+  public float voraussichtlicheEinkommenssteuer() {
+    return (jahresgehaltBisHeute/gearbeiteteMonate) * 12f * 0.16f;
+  }
+  public String toString() {
+    return getClass().getSimpleName() + " " + nachname + ", " + vorname;
+  }
+
 }
