@@ -3,53 +3,81 @@ import java.util.GregorianCalendar;
 
 /**
  * @author Nazanin Golalizadeh
- * @version 17.10.1999
+ * @version 25.10.1999
  */
 
-public class Zeitarbeiter extends IMitarbeiter {
-
+public class Zeitarbeiter implements IMitarbeiter, ISteuerZahler{
+        private String vorname;
+        private String nachname;
         private Float stundenLohn;
         private int gearbeiteteStunden;
+        private int gearbeiteteMonate;
+        private float jahresgehaltBisHeute;
 
 
-    public Zeitarbeiter(String vorname, String nachname, float stundenLohn, int gearbeiteteStunden) {
-       super(vorname, nachname);
+    public Zeitarbeiter(String vorname, String nachname, float stundenLohn, int gearbeiteteStunden,int gearbeiteteMonate, float jahresgehaltBisHeute) {
+        if (stundenLohn / (40 * 4) < MINDEST_LOHN) {
+            System.out.println(stundenLohn + " ist zu wenig");
+
+        }
+        this.vorname = vorname;
+        this.nachname = nachname;
         this.stundenLohn = stundenLohn;
         this.gearbeiteteStunden = gearbeiteteStunden;
+        this.gearbeiteteMonate = new GregorianCalendar().get(Calendar.MONTH);
     }
-
-
-
 //Getter
 
-        public String getVorname(){
+
+        public String getVorname () {
             return vorname;
         }
 
-        public String getNachname(){
+        public String getNachname () {
             return nachname;
         }
 
-        public Float getStundenLohn(){
+        public Float getStundenLohn () {
             return stundenLohn;
 
         }
 
-    public int getGearbeiteteStunden(){
-        return gearbeiteteStunden;
+        public int getGearbeiteteStunden () {
+            return gearbeiteteStunden;
 
-    }
+        }
 
-//Setter gearbeiteteStunden
-    public void setGearbeiteteStunden(int gearbeiteteStunden) {
-        this.gearbeiteteStunden = gearbeiteteStunden;
-    }
+        public float getJahresgehaltBisHeute () {
+            jahresgehaltBisHeute = 0;
+            GregorianCalendar gc = new GregorianCalendar();
+            for (int monthes = 0; monthes < gc.get(Calendar.MONTH); monthes++) {
+                jahresgehaltBisHeute += entgeltBerechnen();
+            }
+            return jahresgehaltBisHeute;
+        }
+//Setter entgeltBerechnen()
 
-    @Override
-    public float entgeltBerechnen() {
-        if (new GregorianCalendar().get(Calendar.MONTH) == Calendar.JANUARY) jahresgehaltBisHeute = 0;
-        super.jahresgehaltBisHeute = gearbeiteteStunden * stundenLohn;
-        return gearbeiteteStunden * stundenLohn;
-    }
+        public void setEntgeltBerechnen ( int gearbeiteteStunden){
+            this.gearbeiteteStunden = gearbeiteteStunden;
+        }
 
+        @Override
+        public float entgeltBerechnen () {
+            if (gearbeiteteMonate == Calendar.JANUARY) jahresgehaltBisHeute = 0;
+            jahresgehaltBisHeute += (gearbeiteteStunden * stundenLohn);
+            return (gearbeiteteStunden * stundenLohn);
+        }
+
+        public float tatsächlicheEinkommenssteuer () {
+            return jahresgehaltBisHeute * 0.16f;
+        }
+
+        public float voraussichtlicheEinkommenssteuer () {
+            return (jahresgehaltBisHeute / gearbeiteteMonate) * 12f * 0.16f;
+        }
+
+        //TOSTRING
+        public String toString() {
+            return getClass().getSimpleName() + " " + nachname + ", " + vorname;
+        }
 }
