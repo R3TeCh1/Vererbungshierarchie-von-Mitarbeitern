@@ -27,7 +27,7 @@ public class ATAngstellter implements IMitarbeiter, ISteuerZahler{
 
 
     public float getMonatsLohn(){
-        return monatsLohn ;
+        return monatslohn;
     }
 
     public float voraussichtlicheEinkommenssteuer() {
@@ -50,8 +50,8 @@ public class ATAngstellter implements IMitarbeiter, ISteuerZahler{
     @Override
     public float entgeltBerechnen() {
         if (new GregorianCalendar().get(Calendar.MONTH) == Calendar.JANUARY) jahresgehaltBisHeute = 0;
-        jahresgehaltBisHeute += monatsLohn;
-        return monatsLohn;
+        jahresgehaltBisHeute += monatslohn;
+        return monatslohn;
     }
 
     public String toString() {
