@@ -3,8 +3,15 @@
  */
 public interface IMitarbeiter {
     float MINDEST_LOHN = 12.00f;
+
     float entgeltBerechnen();
     String toString();
+
+    /**
+     * "Definieren Sie dafür ein Attribut „vertrag“ in der Oberklasse / im Interface"
+     *  wenn ich es hier als Attribut/Variable eine Variable anlege, wird die final.
+     *  also muss ich hier von der Aufgabe abweichen und eine zu implementierende Methode angeben
+     */
     vertragsArtT getVertragsArt();
     static void main(String[] args) {
         Zeitarbeiter zeitarbeiter = new Zeitarbeiter("Nazanin", "Golalizadeh", 15.0f, 40);
